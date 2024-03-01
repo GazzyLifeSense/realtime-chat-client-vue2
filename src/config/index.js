@@ -1,0 +1,1 @@
+export const SocketIP = "https://localhost:3000"
