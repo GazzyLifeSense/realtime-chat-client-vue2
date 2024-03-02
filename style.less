@@ -1,4 +1,4 @@
-:root {
+html {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -41,7 +41,7 @@ button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -65,20 +65,13 @@ button:focus-visible {
 } */
 html, body, #app{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
 // 自定义进度条颜色
 #nprogress .bar {
   background: linear-gradient(to right, rgb(240, 5, 228), rgb(11, 255, 255)) !important; //自定义颜色
-}
-@media only screen and (max-width:767px){
-  html, body, #app{
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
 }
 ul, ol{
   list-style: none;
@@ -90,7 +83,7 @@ ul, ol{
   height: 100%;
 }
 .link{
-  font-size:14px;
+  font-size:0.7rem;
   color: #08A2DE;
 }
 .link:hover{
@@ -220,5 +213,26 @@ ul, ol{
     opacity: 0;
     pointer-events: none;
     position: absolute;
+  }
+}
+@media screen and (min-width: 375px) {
+  html{
+    /* 414px -> 18px */
+    font-size: calc(16px + 2 * (100vw - 375px) / 39);
+  }
+}
+
+@media screen and (min-width: 414px) {
+  html{
+    /* 1000px -> 22px */
+    font-size: calc(18px + 4 * (100vw - 414px) / 586);
+  }
+  
+}
+
+@media screen and (min-width: 1000px) {
+  html{
+    /* +100px -> +0.5px */
+    font-size: calc(22px + 5 * (100vw - 1000px) / 1000);
   }
 }

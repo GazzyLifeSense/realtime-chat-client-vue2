@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './route'
 import ElementUI from 'element-ui';
 import axios from 'axios'
-import '../style.css'
+import '../style.less'
 import 'animate.css'
 import 'nprogress'
 import 'nprogress/nprogress.css'
