@@ -20,6 +20,7 @@
     "dotenv": "^16.0.3",
     "element-ui": "^2.15.12",
     "emoji-regex": "^10.2.1",
+    "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
     "nprogress": "^0.2.0",
     "socket.io-client": "^4.5.4",
