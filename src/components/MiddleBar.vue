@@ -36,11 +36,13 @@ export default {
 <style lang="less" scoped>
 #middlebar{
     min-width: 0;
-    width: 260px;
+    width: 60vw;
+    max-width: 260px;
     display: flex;
     flex-direction: column;
     background: #2E3237;
     position: relative;
+    overflow: hidden;
 }
 .fold{
     width: 0 !important;

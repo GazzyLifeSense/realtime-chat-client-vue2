@@ -117,17 +117,17 @@ export default {
 <style lang="less" scoped>
 #panel-wrap{
     overflow-y: scroll;
-    min-width: 450px;
+    min-width: 280px;
     flex: 1;
     background: #37393F;
     color: white;
     .title{
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 600;
         margin-bottom: 8px;
     }
     .subtitle{
-        font-size: 14px;
+        font-size: 0.8rem;
         color: #B5BABD;
     }
     .addFriend-wrap,.addGroup-wrap,.discover-wrap{
@@ -151,11 +151,12 @@ export default {
             }
             .btn{
                 border-radius: 5px;
-                font-size: 14px;
+                font-size: 0.8rem;
                 padding: 2px 16px;
                 color: #8C8E94;
                 background: #3C438C;
-                height: 32px;
+                height: 2rem;
+                width: 5rem;
                 cursor: not-allowed;
             }
         }
@@ -177,7 +178,7 @@ export default {
         overflow-x: hidden;
         overflow-y: scroll;
         margin-top: 5px;
-        padding:10px 5px;
+        padding: 10px 5px;
         height: 200px;
         .item-wrap{
             display: flex;

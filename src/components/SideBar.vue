@@ -216,14 +216,17 @@ export default {
 <style lang="less" scoped>
 #sidebar{
     background: #212326;
-    width: 72px;
+    width: 10vw;
+    max-width: 72px;
     flex-shrink: 0;
     .tree{
         .seperator{
-            width: 40px;
+            width: 8vw;
+            max-width: 48px;
         }
         .rowItem{
-            height: 48px;
+            height: 8vw;
+            max-height: 48px;
             width: 100%;
             margin: 8px 0;
             display: flex;
@@ -235,10 +238,10 @@ export default {
                 .bar{
                     display: block;
                     background: white;
-                    height: 8px;
-                    width: 8px;
-                    margin-left: -4px;
-                    border-radius: 0 4px 4px 0;
+                    height: 0.4rem;
+                    width: 0.4rem;
+                    margin-left: -0.2rem;
+                    border-radius: 0 0.2rem 0.2rem 0;
                     transition: 0.5s height;
                 }
             }
@@ -283,6 +286,10 @@ export default {
                     top: 2px;
                 }
                 img{
+                    height: 8vw;
+                    width: 8vw;
+                    max-width: 48px;
+                    max-height: 48px;
                     transition: 0.5s border-radius;
                     &:hover{
                         border-radius: 30%;
