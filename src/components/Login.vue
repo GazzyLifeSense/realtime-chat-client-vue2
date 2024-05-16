@@ -1,45 +1,34 @@
 <template>
     <div class="center-container">
-        <div v-if="showLogin" class="login-wrap">
-            <form method="post">
-                <h1>欢迎回来！</h1>
-                <label for="username">用户名<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="text" id="username" v-model="user.username" maxlength="15" required>
-                </div>
-                <label for="password">密码<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="password" id="password" v-model="user.password" required>
-                </div>
-                <button class="login-btn" @click.prevent="toLogin">
-                    <div>登 录</div>
-                </button>
-                <a class="link" @click="showLogin=!showLogin">注册新账号</a>
+        <div class="form-wrap">
+            <img src="@/assets/login_side.png" alt="side" />
+            <form method="post" name="login-form" v-show="!formType">
+                <h1 class="form-title">欢迎回来！</h1>
+                <label for="login_username">用户名<span>*</span></label>
+                <input type="text" id="login_username" v-model="user.username" maxlength="15" required>
+                
+                <label for="login_password">密码<span>*</span></label>
+                <input type="password" id="login_password" v-model="user.password" required>
+                
+                <button class="form-btn" @click.prevent="toLogin">登 录</button>
+                <a class="link" @click="formType=1">注册新账号</a>
             </form>
-        </div>
-        <div v-if="!showLogin" class="reg-wrap">
-            <form method="post">
-                <h1>创建账号</h1>
+            <form method="post" name="reg-form" v-show="formType == 1">
+                <h1 class="form-title">创建账号</h1>
                 <label for="nickname">给你的用户取一个闪亮的昵称<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="text" id="nickname" v-model="user.nickname" maxlength="6" required>
-                </div>
-                <label for="username">用户名<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="text" id="username" v-model="user.username" maxlength="15" required>
-                </div>
-                <label for="password">密码<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="password" id="password" v-model="user.password" required>
-                </div>
-                <label for="check_password">确认密码<span>*</span></label>
-                <div class="input-wrap">
-                    <input type="password" id="check_password" v-model="check_password" required>
-                </div>
-                <button class="reg-btn" @click.prevent="toRegister">
-                    <div>注 册</div>
-                </button>
-                <a class="link tologin" @click="showLogin=!showLogin">已有账户？</a>
+                <input type="text" id="nickname" v-model="user.nickname" maxlength="6" required>
+                
+                <label for="reg_username">用户名<span>*</span></label>
+                <input type="text" id="reg_username" v-model="user.username" maxlength="15" required>
+                
+                <label for="reg_password">密码<span>*</span></label>
+                <input type="password" id="reg_password" v-model="user.password" required>
+                
+                <label for="reg_check_password">确认密码<span>*</span></label>
+                <input type="password" id="reg_check_password" v-model="check_password" required>
+                
+                <button class="form-btn" @click.prevent="toRegister">注 册</button>
+                <a class="link tologin" @click="formType=!formType">已有账户？</a>
             </form>
         </div>
     </div>
@@ -52,7 +41,8 @@ export default {
     name: 'Login',
     data(){
         return {
-            showLogin:true,
+            // 0: login | 1: register | 2: reset
+            formType: 0,
             check_password: '',
             user: {
                 username: '',
@@ -113,63 +103,55 @@ export default {
 
 <style lang="less" scoped>
 .center-container{
-    background: url('../assets/bg.jpg');
+    padding: 1em;
+    background: url('../assets/login_bg.avif') no-repeat;
     background-size: cover;
     color: white;
 }
 h1{ text-align: center; }
-.login-wrap, .reg-wrap{
-    width: 480px;
-    background: #595b63b0;
-    padding:32px;
-    border-radius: 5px;
+.form-wrap{
+    max-width: 50em;
+    border-radius: .8em;
+    display: flex;
+    overflow: hidden;
+    img{
+        width: 50%;
+    }
     form{
+        color: #305C70;
+        width: 50%;
+        padding: 2em;
         display: flex;
         flex-direction: column;
+        background: white;
     }
-}
-.login-wrap{
-    height: 450px;
-}
-.reg-wrap{
-    height: 550px;
 }
 label{
     font-size: 12px;
     display: block;
     margin-bottom: 8px;
-    color: #B5BABD;
+    color: #9CA3B1;
     span{
         color: red;
     }
 }
-.forget-pwd{
-    margin: 5px 0 20px 0;
-}
-.login-btn, .reg-btn{
-    flex: 1;
-    background-color: #4752C3;
-    border: none;
-    border-radius: 2px;
-    padding: 10px;
-    margin-bottom: 5px;
-    div{
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-    }
-}
-.input-wrap{
+input{
     display: flex;
-    input{
-        outline: none;
-        border: none;
-        border-radius: 2px;
-        flex: 1;
-        color: white;
-        background-color: #212326;
-        padding:10px;
-        margin-bottom: 20px;
-    }
+    outline: none;
+    border: 2px solid currentColor !important;
+    border-radius: .6em;
+    padding:10px;
+    margin-bottom: 20px;
+    background-color: white;
+    color: inherit !important;
+}
+.form-btn{
+    background-color: #305C70;
+    border: none;
+    border-radius: .5em;
+    padding: .5em;
+    margin-bottom: .4em;
+    font-size: 18px;
+    font-weight: 600;
 }
 </style>
