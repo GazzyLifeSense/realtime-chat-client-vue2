@@ -25,28 +25,28 @@
         <div class="group-menu fadeIn" v-show="isScroller">
             <div>GID: {{page.to._id}}</div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
 
             <div>
                 <div class="flex-start">群简介&nbsp;<a v-if="page.to.owner === user._id" @click="updateGroupDescription"><img src="@/assets/修改.svg"></a></div>
                 <div class="multiline">{{page.to.description==''?'无':page.to.description}}</div>
             </div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
 
             <div class="item" @click="uploadGroupAvatar" v-if="page.to.owner === user._id">修改群组头像</div>
             <input type="file" class="upload-hide" @change="getFile($event,1)" ref="groupAvatar" accept=".jpg,.jpeg,.png,.webp,.ico,.svg">
             
-            <div class="seperator" v-if="page.to.owner === user._id"></div>
+            <div class="separator" v-if="page.to.owner === user._id"></div>
             
             <div class="item" @click="uploadGroupBanner" v-if="page.to.owner === user._id">修改群组横幅</div>
             <input type="file" class="upload-hide" @change="getFile($event,2)" ref="groupBanner" accept=".jpg,.jpeg,.png,.webp,.ico,.svg">
             
-            <div class="seperator" v-if="page.to.owner === user._id"></div>
+            <div class="separator" v-if="page.to.owner === user._id"></div>
             
             <div class="item exit flex-between-center" @click="exitGroup">离开群组<img src="@/assets/退出.svg"></div>
 
-            <div class="seperator" v-if="page.to.owner === user._id"></div>
+            <div class="separator" v-if="page.to.owner === user._id"></div>
 
             <div class="item exit flex-between-center" v-if="page.to.owner === user._id" @click="dismissGroup">解散群组<img src="@/assets/解散.svg" height="19"></div>
         </div>
@@ -297,7 +297,7 @@ export default {
         top: 50px;
         left: 12px;
         font-size: 14px;
-        >*:not([class='seperator']){
+        >*:not([class='separator']){
             padding: 6px 8px;
             margin: 2px 0;
         }

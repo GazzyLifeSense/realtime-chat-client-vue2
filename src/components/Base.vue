@@ -46,7 +46,6 @@ export default {
 
 <style lang="less" scoped>
 #base{
-    height: 100%;
     display: flex;
     flex: 1;
 }

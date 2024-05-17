@@ -1,32 +1,32 @@
 <template>
     <div id="panel-wrap" class="full scrollbar">
         <div class="addFriend-wrap">
-            <div class="title bounceInRight">添加好友</div>
-            <div class="subtitle">您可以输入用户名来添加好友。记得区分大小写哦！</div>
-            <div class="input-wrap flex-center" :class="{active}">
+            <p class="title bounceInRight">添加好友</p>
+            <p class="subtitle">您可以输入用户名来添加好友。记得区分大小写哦！</p>
+            <p class="input-wrap flex-center">
                 <input type="text" class="input line" v-model="to" placeholder="输入用户名" maxlength="15">
-                <button class="btn line" ref="applyFriend_btn" >发送好友请求</button>
-            </div>
+                <button class="btn line" ref="applyFriend_btn" :class="{active: friendSearchActive}">发送好友请求</button>
+            </p>
         </div>
         <div class="addGroup-wrap">
-            <div class="title bounceInRight">搜索群组</div>
-            <div class="subtitle">您可以输入群组名来搜索群组。记得区分大小写哦！</div>
-            <div class="input-wrap flex-center" :class="{active1}">
+            <p class="title bounceInRight">搜索群组</p>
+            <p class="subtitle">您可以输入群组名来搜索群组。记得区分大小写哦！</p>
+            <p class="input-wrap flex-center">
                 <input type="text" class="input line" v-model="groupName" placeholder="输入群组名" maxlength="13">
-                <button class="btn line" ref="searchGroup_btn" >查找</button>
-            </div>
-            <div class="list-wrap scrollbar">
-                <div class="item-wrap" v-for="group of groupList" :key="group._id">
+                <button class="btn line" ref="searchGroup_btn" :class="{active: groupSearchActive}">查找</button>
+            </p>
+            <ul class="list-wrap scrollbar">
+                <li class="item-wrap" v-for="group of groupList" :key="group._id">
                     <img :src="getGroupAvatar(group.avatar)"  height=48 width=48 class="icon">
                     <div class="groupInfo">{{group.name}}</div>
                     <el-button type="primary" size="small" @click="applyGroup(group._id)">申请</el-button>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
         <div class="discover-wrap">
-            <div class="title bounceInRight">其他能交友的地方</div>
+            <p class="title bounceInRight">其他能交友的地方</p>
             <button class="discover-btn flex-center line" @click.prevent="enterDiscovery">
-                <img src="../assets/discover.svg" height="35" class="discover-img iconflex-center">
+                <img src="../assets/discover.svg" class="discover-img iconflex-center">
                 <div class="desc">探索公开服务器</div>
                 <svg class="arrow" fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m5.41667 4.2625 5.66573 5.7375-5.66573 5.7375 1.74426 1.7625 7.42237-7.5-7.42237-7.5z" fill="currentColor" fill-rule="evenodd"></path></svg>
             </button>
@@ -43,8 +43,8 @@ export default {
             to: '',
             groupName: '',
             groupList: [],
-            active: false,
-            active1: false
+            friendSearchActive: false,
+            groupSearchActive: false
         }
     },
     computed:{
@@ -95,19 +95,19 @@ export default {
         // 控制按钮样式
         to(newV,oldV){
             if(newV.length > 0) {
-                this.active = true;
+                this.friendSearchActive = true;
                 this.$refs.applyFriend_btn.onclick = this.applyFriend
             }else{
-                this.active = false;
+                this.friendSearchActive = false;
                 this.$refs.applyFriend_btn.onclick = null
             } 
         },
         groupName(newV,oldV){
             if(newV.length > 0) {
-                this.active1 = true;
+                this.groupSearchActive = true;
                 this.$refs.searchGroup_btn.onclick = this.getGroupsByName
             }else{
-                this.active1 = false;
+                this.groupSearchActive = false;
                 this.$refs.searchGroup_btn.onclick = null
             } 
         },
@@ -116,70 +116,64 @@ export default {
 </script>
 <style lang="less" scoped>
 #panel-wrap{
-    overflow-y: scroll;
-    min-width: 280px;
+    overflow-y: auto;
     flex: 1;
     background: #37393F;
     color: white;
+    p{
+        margin: .5em 0;
+    }
     .title{
         font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 8px;
     }
     .subtitle{
         font-size: 0.8rem;
         color: #B5BABD;
     }
     .addFriend-wrap,.addGroup-wrap,.discover-wrap{
-        padding: 20px 30px;
+        padding: 1em 1.5em;
     }
     .addFriend-wrap,.addGroup-wrap{
         border-bottom: 1px solid #42454A; 
         .input-wrap{
-            padding: 0 12px;
+            padding: .5em 0.75em;
             background: #212326;
-            height: 50px;
-            border-radius: 10px;
-            margin-top: 16px;
+            border-radius: .5em;                
+            font-size: 0.7em;
             .input{
                 flex: 1;
                 background: transparent;
                 outline: none;
                 border: 0;
-                font-size: 16px;
                 color: white;
             }
             .btn{
-                border-radius: 5px;
-                font-size: 0.8rem;
-                padding: 2px 16px;
+                border-radius: .5em;
+                padding: .5em 1em;
                 color: #8C8E94;
                 background: #3C438C;
-                height: 2rem;
-                width: 5rem;
                 cursor: not-allowed;
             }
         }
         .input-wrap:focus-within{
             border: 1px solid rgb(0, 217, 255);
         }
-        .active,.active1{
-            .btn{
-                color: white;
-                background: #5865F2;
-                cursor: pointer;
-            }
+        
+        .btn.active{
+            color: white;
+            background: #5865F2;
+            cursor: pointer;
         }
+        
         .success:focus-within{
             border: 1px solid rgb(62, 241, 116);
         }
     }
     .list-wrap{
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         margin-top: 5px;
-        padding: 10px 5px;
-        height: 200px;
         .item-wrap{
             display: flex;
             justify-content: flex-start;
@@ -198,15 +192,14 @@ export default {
         .discover-btn{
             background: #2E3136;
             color: #D6D7D6;
-            font-size: 16px;
-            height: 56px;
-            padding: 1px 6px;
-            margin: 10px 0;
+            padding: .5em .8em;
+            margin: .625em 0;
             .discover-img{
-                margin: 5px;
+                height: 2em;
+                margin-right: .5em;
             }
             .arrow{
-                margin: 0 16px;
+                margin-left: .5em;
             }
         }
         .discover-btn:hover{

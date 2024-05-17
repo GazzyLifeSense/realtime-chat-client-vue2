@@ -11,39 +11,39 @@
              <div class="detail">
                  <div class="nickname flex-start"><div class="label">昵称：</div>{{config.user?.nickname}}&nbsp;</div>
                  
-                 <div class="seperator"></div>
+                 <div class="separator"></div>
                  
                  <div class="username">
                     <h3>用户名</h3>
                     <div class="text">{{config.user?.username}}</div>
                  </div>
                 
-                 <div class="seperator"></div>
+                 <div class="separator"></div>
                  
                  <div class="location">
                      <h3>归属地</h3>
                      <div class="text">{{config.user?.location}}</div>
                  </div>
 
-                 <div class="seperator"></div>
+                 <div class="separator"></div>
                  
                  <div class="introduction">
                      <h3 class="flex-start">个人介绍</h3>
                      <div class="text">{{config.user?.introduction==''?'此人很懒,没有留下任何信息':config.user?.introduction}}</div>
                  </div>
                  
-                 <div class="seperator"></div>
+                 <div class="separator"></div>
                  
                  <div class="regDate">
                      <h3>注册时间</h3>
                      <div class="text">{{new Date(parseInt(config.user?.regDate)).toLocaleString()}}</div>
                  </div>
 
-                <div class="seperator"></div>
+                <div class="separator"></div>
 
                 <div class="opt flex-start" @click.stop="applyFriend" v-if="config.type==2">申请好友</div>
                 
-                <div class="seperator"></div>
+                <div class="separator"></div>
 
                 <div class="opt flex-start" @click.stop="enterPrivateChat(config.user)" v-if="config.type==2">发送信息</div>
             </div>

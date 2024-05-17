@@ -1,63 +1,62 @@
 <template>
-    <div id="userDetail" class="flex-center" ref='menu' :style="{display: config.display}">
-         <div class="banner"></div>
-         <img class="cancel" src="@/assets/arrowDown.svg" @click.stop="hide">
-         <div class="avatar">
-             <div class="mask">
-                 <img :src="getUserAvatar(user.avatar)" title="上传头像" @click.stop="uploadAvatar" height="80" width="80">
-             </div>
-             
-             <input type="file" class="upload-hide" @change="getFile($event)" ref="file" accept=".jpg,.jpeg,.png,.webp,.ico,.svg">
-             <div class="online"></div>
-         </div>
-         <div class="detail-wrap flex-center">
-             <div class="detail">
-                 <div class="nickname flex-start"><div class="label">昵称：</div>{{user.nickname}}&nbsp;<a @click="updateNickname"><img src="@/assets/修改.svg"></a></div>
-                 
-                 <div class="seperator"></div>
-                 
-                 <div class="username">
-                    <h3>用户名</h3>
-                    <div class="text">{{user.username}}</div>
-                 </div>
-                 
-                 <div class="seperator"></div>
-                 
-                 <div class="uid">
-                    <h3>UID</h3>
-                    <div class="text">{{user._id}}</div>
-                 </div>
+    <div id="userDetail" class="flex-center" ref='menu' v-if="open">
+        <div class="banner"></div>
+        <img class="cancel" src="@/assets/arrowDown.svg" @click.stop="hide">
+        <div class="avatar-wrap">
+            <div class="mask">
+                <img :src="getUserAvatar(user.avatar)" class="avatar" title="上传头像" @click.stop="uploadAvatar">
+            </div>
+            <input type="file" hidden @change="getFile($event)" ref="file" accept=".jpg,.jpeg,.png,.webp,.ico,.svg">
+            <div class="online"></div>
+        </div>
+        <div class="detail-wrap flex-center">
+            <div class="detail">
+                <div class="nickname flex-start"><div class="label">昵称：</div>{{user.nickname}}&nbsp;<a @click="updateNickname"><img src="@/assets/修改.svg"></a></div>
                 
-                 <div class="seperator"></div>
-                 
-                 <div class="location">
-                     <h3>归属地</h3>
-                     <div class="text">{{user.location}}</div>
-                 </div>
+                <div class="separator"></div>
+                
+                <div class="username">
+                <h3>用户名</h3>
+                <div class="text">{{user.username}}</div>
+                </div>
+                
+                <div class="separator"></div>
+                
+                <div class="uid">
+                <h3>UID</h3>
+                <div class="text">{{user._id}}</div>
+                </div>
+            
+                <div class="separator"></div>
+                
+                <div class="location">
+                    <h3>归属地</h3>
+                    <div class="text">{{user.location}}</div>
+                </div>
 
-                 <div class="seperator"></div>
-                 
-                 <div class="introduction">
-                     <h3 class="flex-start">个人介绍&nbsp;<a @click="updateIntroduction"><img src="@/assets/修改.svg"></a></h3>
-                     <div class="text">{{user.introduction==''?'此人很懒,没有留下任何信息':user.introduction}}</div>
-                 </div>
-                 
-                 <div class="seperator"></div>
-                 
-                 <div class="regDate">
-                     <h3>注册时间</h3>
-                     <div class="text">{{new Date(parseInt(user.regDate)).toLocaleString()}}</div>
-                 </div>
+                <div class="separator"></div>
+                
+                <div class="introduction">
+                    <h3 class="flex-start">个人介绍&nbsp;<a @click="updateIntroduction"><img src="@/assets/修改.svg"></a></h3>
+                    <div class="text">{{user.introduction==''?'此人很懒,没有留下任何信息':user.introduction}}</div>
+                </div>
+                
+                <div class="separator"></div>
+                
+                <div class="regDate">
+                    <h3>注册时间</h3>
+                    <div class="text">{{new Date(parseInt(user.regDate)).toLocaleString()}}</div>
+                </div>
 
-                 <div class="seperator"></div>
+                <div class="separator"></div>
 
-                 <div class="logout flex-start" @click.stop="updatePassword"><img src="@/assets/修改密码.svg">&nbsp;修改密码</div>
+                <div class="logout flex-start" @click.stop="updatePassword"><img src="@/assets/修改密码.svg">&nbsp;修改密码</div>
 
-                <div class="seperator"></div>
+            <div class="separator"></div>
 
-                 <div class="logout flex-start" @click.stop="logout"><img src="@/assets/logout.svg">&nbsp;注销</div>
-             </div>
-         </div>
+                <div class="logout flex-start" @click.stop="logout"><img src="@/assets/logout.svg">&nbsp;注销</div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -66,11 +65,11 @@
 import imgMixin from '@/mixin/imgMixin.js'
 export default {
     name: 'userDetail',
-    props: ['config'],
+    props: ['open'],
     mixins: [imgMixin],
     methods:{
         hide(){
-            this.config.display='none'
+            this.open = false
         },
         getFile(e){
             let file = e.target.files[0]
@@ -208,19 +207,19 @@ export default {
 #userDetail{
     background: #232429;
     position: absolute;
-    bottom: 50px;
-    width: 340px;
-    border-radius: 15px;
-    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 3.125em;
+    border-radius: 1em;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     cursor: default;
     z-index: 1;
     .banner{
-        border-radius: 15px 15px 0 0;
+        border-radius: 1em 1em 0 0;
         width: 100%;
-        height: 60px;
+        height: 3.75em;
         background: linear-gradient(to right,rgb(12, 162, 182),rgb(21, 240, 167));
     }
     .cancel{
@@ -230,10 +229,10 @@ export default {
         cursor: pointer;
         z-index: 1;
     }
-    .avatar{
+    .avatar-wrap{
         position: absolute;
-        left: 15px;
-        top: 15px;
+        left: 1em;
+        top: 1em;
         border: 6px solid #232429;
         border-radius: 50%;
         background-color: #232429;
@@ -247,20 +246,24 @@ export default {
         .mask:hover:after{
             content: '上传头像';
             position: absolute;
-            top: 28px;
-            left: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            white-space: nowrap;
             pointer-events: none;
         }
-        img{
+        .avatar{
+            height: 5em;
+            width: 5em;
             position: relative;
             overflow: hidden;
             border-radius: 50%;
         }
         .online{
             background-color: #21A65A;
-            height: 26px;
-            width: 26px;        
-            top: 55px;
+            height: 1.625em;
+            width: 1.625em;        
+            top: 3.4375em;
             right: -5px;
             z-index: 1;
             position: absolute;
@@ -271,7 +274,7 @@ export default {
     }
     .detail-wrap{
         width: 100%;
-        padding: 55px 16px 16px;
+        padding: 3.7em 1em 1em;
         
         .detail{
             font-size: 20px;

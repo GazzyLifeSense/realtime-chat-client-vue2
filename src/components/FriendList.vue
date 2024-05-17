@@ -91,7 +91,7 @@ export default {
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         max-height: calc(100% - 44px);
         .list-item{
             display: flex;

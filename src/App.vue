@@ -45,10 +45,6 @@ export default {
 </script>
 
 <style scoped>
-#app{
-  width: 100%;
-  height: 100%;
-}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -61,6 +57,4 @@ export default {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
-
-
 </style>

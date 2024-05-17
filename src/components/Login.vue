@@ -103,6 +103,8 @@ export default {
 
 <style lang="less" scoped>
 .center-container{
+    width: 100vw;
+    height: 100vh;
     padding: 1em;
     background: url('../assets/login_bg.avif') no-repeat;
     background-size: cover;

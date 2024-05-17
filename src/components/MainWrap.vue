@@ -89,7 +89,7 @@ export default {
                 })
                 
                 this.$socket.on("connect", () => {
-                    this.$notify.success('连接服务器成功')
+                    this.$notify.success('连接服务器成功',100)
                     if(this.page.to){
                         this.$bus.$emit('recvMsg')
                         this.$bus.$emit('getMsg')
@@ -174,6 +174,8 @@ export default {
 
 <style lang="less" scoped>
     #mainwrap{
+        min-height: 100vh;
+        width: 100vw;
         display: flex;
         background: white;
     }

@@ -6,11 +6,11 @@
                     <span class="bar"></span>
                 </div>
                 <div class="itemWrap" >
-                    <img src="../assets/avatar.png" title="主页" height=48 width=48 class="icon">
+                    <img src="../assets/avatar.png" title="主页" class="icon">
                 </div>
             </div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
             
             <div class="groupList miniscrollbar">
                 <div class="rowItem" :class="{'active':page.to&&page.to._id==group._id}" v-for="group in groupList" :key="group._id" @click="enterGroup(group)">
@@ -27,32 +27,32 @@
 
             <div class="rowItem">
                 <div class="itemWrap" @click="show='flex'">
-                   <img src="../assets/add.svg" title="添加" height=48 width=48 class="icon">
+                   <img src="../assets/add.svg" title="添加" class="icon">
                 </div>
             </div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
 
             <div class="rowItem" @click="enterDiscovery">
                 <div class="itemWrap" >
-                    <img src="../assets/探索发现.svg" title="探索" height="48" class="icon flex-center">
+                    <img src="../assets/探索发现.svg" title="探索" class="icon flex-center">
                 </div>
             </div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
 
             <div class="rowItem" @click="showNewMsgList">
                 <div class="itemWrap" >
-                    <img src="../assets/消息1.svg" title="未读消息" height="54" class="icon flex-center">
+                    <img src="../assets/消息1.svg" title="未读消息" class="icon flex-center">
                     <div class="pot" v-if="messageList.length > 0"></div>
                 </div>
             </div>
 
-            <div class="seperator"></div>
+            <div class="separator"></div>
 
             <div class="rowItem" @click="fold">
-                <div class="itemWrap fold" >
-                    <img src="../assets/折叠.svg" title="折叠" height="46" class="icon flex-center fold" :class="{isFold}">
+                <div class="itemWrap" >
+                    <img src="../assets/折叠.svg" title="折叠" class="icon flex-center fold" :class="{isFold}">
                 </div>
             </div>
         </ul>
@@ -95,7 +95,7 @@
             </div>
         </div>    
 
-        <message-list :config=messageListConfig></message-list>
+        <message-list :config="messageListConfig"></message-list>
     </div>
 </template>
 
@@ -217,18 +217,15 @@ export default {
 #sidebar{
     background: #212326;
     width: 10vw;
-    max-width: 72px;
+    max-width: 5em;
     flex-shrink: 0;
     .tree{
-        .seperator{
-            width: 8vw;
-            max-width: 48px;
+        overflow-y: auto;
+        .separator{
+            width: 80%;
         }
         .rowItem{
-            height: 8vw;
-            max-height: 48px;
-            width: 100%;
-            margin: 8px 0;
+            margin: .5em 0;
             display: flex;
             .barWrap{
                 display: flex;
@@ -238,8 +235,8 @@ export default {
                 .bar{
                     display: block;
                     background: white;
-                    height: 0.4rem;
-                    width: 0.4rem;
+                    height: 0.4em;
+                    width: 0.4em;
                     margin-left: -0.2rem;
                     border-radius: 0 0.2rem 0.2rem 0;
                     transition: 0.5s height;
@@ -263,10 +260,9 @@ export default {
                     border: solid 4px #1E1F23;
 
                     text-align: center;
-                    font-size: 12px;
+                    font-size: .75em;
                     font-weight: bold;
                     color: #FFFFEF;
-
                     pointer-events: none;
                 }
             }
@@ -286,38 +282,34 @@ export default {
                     top: 2px;
                 }
                 img{
-                    height: 8vw;
-                    width: 8vw;
-                    max-width: 48px;
-                    max-height: 48px;
-                    transition: 0.5s border-radius;
+                    transition: 0.5s transform;
                     &:hover{
-                        border-radius: 30%;
+                        transform: scale(1.2)
                     }
                 }
+                .icon{
+                    width: 80%;
+                }
                 .fold{
+                    width: 70%;
                     transition: 1.5s transform !important;
                 }
             }
         }
         .rowItem:hover{
             .bar{
-                height: 22px;
+                height: 30%;
             }   
         }
         .rowItem[class*="active"]{
             .bar{
-                height: 35px;
+                height: 80%;
             }
             .itemWrap{
                 img{
                     border-radius: 30%;
                 }
             }
-        }
-        .groupList{
-            max-height: 320px;
-            overflow-y: scroll;
         }
     }
     .backdrop{

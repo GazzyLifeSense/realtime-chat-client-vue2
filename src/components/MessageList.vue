@@ -1,16 +1,24 @@
 <template>
-    <div id="messageList" class="flex-center" ref='menu' :style="{display: config.display}">
-        <img class="cancel" src="@/assets/arrowDown.svg" @click.stop="hide">
-         <div class="detail-wrap flex-start-center miniscrollbar">
-             <div class="detail flex-between-center" v-for="message of messageList" :key="message._id" @click="enterPrivateChat(getTo(message.from))">
-                <div class="left line">
-                    <div class="nickname">{{ getNickname(message.from) }}</div>
-                    <div class="text">{{ message.content }}</div>
-                </div>
-                <div class="time">{{ parseTime(message.create_time) }}</div>
+    <section class="message-list-wrap" v-if="config.display != 'none'">
+        <div class="mask" @click.self="hide"></div>
+        <div id="messageList" class="flex-center" ref='menu'>
+            <img class="cancel" src="@/assets/arrowDown.svg" @click.stop="hide">
+            <div class="detail-wrap flex-start-center miniscrollbar">
+                <template v-if="Array.isArray(messageList)">
+                    <div class="detail flex-between-center" v-for="message of messageList" :key="message._id" @click="enterPrivateChat(getTo(message.from))">
+                        <div class="left line">
+                            <div class="nickname">{{ getNickname(message.from) }}</div>
+                            <div class="text">{{ message.content }}</div>
+                        </div>
+                        <div class="time">{{ parseTime(message.create_time) }}</div>
+                    </div>
+                </template> 
+                <template>
+                    <p style="text-align: center">暂无消息</p>
+                </template> 
             </div>
-         </div>
-    </div>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -59,25 +67,34 @@ export default {
 </script>
 
 <style lang="less" setup>
+.message-list-wrap{
+    z-index: 1;
+    .mask{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+}
 #messageList{
     background: #232429;
     position: fixed;
     width: 340px;
     border: 6px solid;
     border-image: linear-gradient(#63e984, #5c3cec) 20;
-    display: none;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     cursor: default;
-    z-index: 1;
+    z-index: inherit;
     left: 50%;
     top:50%;
     transform: translateX(-50%) translateY(-50%);
     .cancel{
         position: absolute;
-        right: 15px;
-        top: 15px;
+        right: .75em;
+        top: .75em;
         cursor: pointer;
         z-index: 1;
     }
@@ -107,11 +124,11 @@ export default {
     }
     .detail-wrap{
         width: 100%;
-        height: 500px;
-        padding: 35px 16px 16px;
-        background: linear-gradient(to bottom,rgb(17, 6, 17), 70%, rgb(39, 36, 192));
+        max-height: 80vh;
+        padding: 1.5em;
+        background: linear-gradient(to bottom,rgb(163, 34, 163), 70%, rgb(41, 230, 237));
         flex-direction: column;
-        overflow-y: scroll;
+        overflow-y: auto;
         .detail{
             font-size: 20px;
             border-radius: 15px;
